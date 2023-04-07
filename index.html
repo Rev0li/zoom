@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Before Semicolon</title>
+	<link rel="stylesheet" href="./setup.css">
+	<style>
+
+		*, *::after, *::before {
+		  box-sizing: border-box;
+		}
+		@keyframes slideDown {
+			100%{
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		body {
+      height: 100vh;
+			background: linear-gradient(45deg, black, #ea3e3e);
+			color: #ddd;
+      margin: 0;
+		}
+
+		.wrapper {
+      width: 100vw;
+      height: 100vh;
+
+		}
+
+		.cards {
+			display: flex;
+
+    }
+    @media (max-width: 850px) { 
+      .cards {
+      flex-direction: column;
+    }
+    .card {
+      width: calc(100vw - 20px)!important;
+      
+    }
+    .rightdown{
+      height: 46vh!important;
+      flex-direction: column;
+    }
+    .leftbot{
+      
+      min-height: 45vh;
+    }
+    .rd1, .rd2, .leftbot, .lefttop {
+      min-height: 45vh;
+    }
+     }
+
+
+    .leftside {
+      display: flex;
+			flex-wrap: wrap;
+      flex-direction: column;
+      width: 40vw;
+      
+    }
+    .rightside{
+      display: flex;
+			flex-wrap: wrap;
+      flex-direction: column;
+      width: 60vw;
+    }
+    .righttop{
+      height: 46vh;
+      width: calc(100%  - 20px );
+    }
+    .rightdown{
+      display: flex;
+      height: 50vh;
+      width: calc(100%  - 20px );
+    }
+    .rd1{
+      width: 30vw;
+    }
+    .rd2{
+      width: 30vw;
+    }
+    .lefttop {
+      width: calc(100%  - 20px );
+      height: calc(60% - 20px );;
+    }
+    .leftbot{
+      width: calc(100%  - 20px );
+      height: calc(40% - 20px );
+    }
+
+
+
+		.card {
+			/* width: 50vw; */
+      margin: 10px;
+			border-radius: 35px;
+			cursor: pointer;
+      max-width: calc(100% - 20px);
+      max-height: calc(100% - 20px);
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+      overflow: hidden;
+			background-color: #222;
+			color: #dc7b7b;
+			padding: 10px;
+			border: 3px solid #e25656;
+			box-shadow: 0 0 9px #4c0505;
+		}
+
+    /* .card {
+      display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+      width: 100vw;
+    } */
+
+    
+
+		.card-content {
+			padding: 100px 25px 25px;
+			overflow: auto;
+			color: #fff;
+      text-align: center;
+		}
+		.card-content > * {
+			transform: translateY(-35px);
+			opacity: 0;
+		}
+		.card-content h2 {
+			font-size: 32px;
+			margin-bottom: 35px !important;
+			animation: slideDown 0.5s ease-out forwards;
+		}
+		.card-content img {
+      height: 60vh;
+			/* width: 100%; */
+			background-color: #fff;
+			margin-bottom: 10px;
+			animation: slideDown 0.5s ease-out 0.2s forwards;
+		}
+		.card-content p {
+			color: #999;
+			animation: slideDown 0.5s ease-out 0.4s forwards;
+		}
+.paint-gallery{
+  background-image: url("./paint-gallery.webp");
+}
+    .scene{
+      background-image:url("./scene.jpg");
+    }
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+
+			<div class="cards">
+
+        <div class="leftside" >
+			    <div class="card lefttop" data-type="luidji-colors-show.webp">
+			    	<img src="./luidji-colors-show.webp" />
+            <h2>Victor-futur</h2>
+			    </div>
+			    <div class="card leftbot paint-gallery" data-type="paint-gallery.webp">
+            
+			    	<h2>My paint</h2>
+			    </div>
+        </div>
+
+        <div class="rightside" >
+			  	<div class="card righttop scene" data-type="scene.jpg">
+            
+			  		<h2>Scene</h2>
+			  	</div>
+
+          <div class="rightdown" >
+			  	<div class="card rd1" data-type="shop.png">
+            <img src="./shop.png" />
+			  		<h2>Shop</h2>
+			  	</div>
+			  	<div class="card rd2" data-type="show.jpg">
+            <img src="./show.jpg" />
+			  		<h2>Last show</h2>
+			  	</div>
+        </div>
+        </div>
+			</div>
+	</div>
+
+	<script>
+		const cards = document.querySelectorAll('.card');
+
+		// this is the old and much hackier solution
+// 		const toggleExpansion = (element, to, duration = 350) => {
+// 		  return new Promise((res) => {
+// 		    requestAnimationFrame(() => {
+// 		      element.style.transition = `
+// 			width ${duration}ms ease-in-out,
+// 			height ${duration}ms ease-in-out,
+// 			left ${duration}ms ease-in-out,
+// 			top ${duration}ms ease-in-out
+// 		      `;
+// 		      requestAnimationFrame(() => {
+// 			element.style.top = to.top;
+// 			element.style.left = to.left;
+// 			element.style.width = to.width;
+// 			element.style.height = to.height;
+// 		      })
+// 		    });
+// 		    setTimeout(res, duration);
+// 		  })
+// 		}
+		
+		const toggleExpansion = (element, to, duration = 350) => {
+		  return new Promise((res) => {
+		    element.animate([
+		      {
+			top: to.top,
+			left: to.left,
+			width: to.width,
+			height: to.height
+		      }
+		    ], {duration, fill: 'forwards', ease: 'ease-in'})
+		    setTimeout(res, duration);
+		  })
+		}
+
+		const fadeContent = (element, opacity, duration = 300) => {
+			return new Promise(res => {
+				[...element.children].forEach((child) => {
+					requestAnimationFrame(() => {
+						child.style.transition = `opacity ${duration}ms linear`;
+						child.style.opacity = opacity;
+					});
+				})
+				setTimeout(res, duration);
+			})
+		}
+
+		const getCardContent = (title, type) => {
+			return `
+				<div class="card-content">
+					<h2>${title}</h2>
+					<img src="./${type}" alt="${title}">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor eum ipsa molestiae nesciunt nostrum porro
+						reprehenderit? Animi corporis deleniti dolore laborum, nemo pariatur temporibus voluptatem.
+					</p>
+				</div>
+			`;
+		}
+
+		const onCardClick = async (e) => {
+			const card = e.currentTarget;
+			// clone the card
+			const cardClone = card.cloneNode(true);
+			// get the location of the card in the view
+			const {top, left, width, height} = card.getBoundingClientRect();
+			// position the clone on top of the original
+			cardClone.style.position = 'fixed';
+			cardClone.style.top = top + 'px';
+			cardClone.style.left = left + 'px';
+			cardClone.style.width = width + 'px';
+			cardClone.style.height = height + 'px';
+			// hide the original card with opacity
+			card.style.opacity = '0';
+			// add card to the same container
+			card.parentNode.appendChild(cardClone);
+			// create a close button to handle the undo
+			const closeButton = document.createElement('button');
+			// position the close button top corner
+			closeButton.style = `
+				position: fixed;
+				z-index: 10000;
+				top: 35px;
+				right: 35px;
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				background-color: #e25656;
+			`;
+			// attach click event to the close button
+			closeButton.addEventListener('click', async () => {
+				// remove the button on close
+				closeButton.remove();
+				// remove the display style so the original content is displayed right
+				cardClone.style.removeProperty('display');
+				cardClone.style.removeProperty('padding');
+				// show original card content
+				[...cardClone.children].forEach(child => child.style.removeProperty('display'));
+				fadeContent(cardClone, '0');
+				// shrink the card back to the original position and size
+				await toggleExpansion(cardClone, {top: `${top}px`, left: `${left}px`, width: `${width}px`, height: `${height}px`}, 300)
+				// show the original card again
+				card.style.removeProperty('opacity');
+				// remove the clone card
+				cardClone.remove();
+			});
+			// fade the content away
+			fadeContent(cardClone, '0')
+				.then(() => {
+					[...cardClone.children].forEach(child => child.style.display = 'none');
+				});
+			// expand the clone card
+			await toggleExpansion(cardClone, {top: 0, left: 0, width: '100vw', height: '100vh'});
+			const content = getCardContent(card.textContent, card.dataset.type)
+			// set the display block so the content will follow the normal flow in case the original card is not display block
+			cardClone.style.display = 'block';
+			cardClone.style.padding = '0';
+			// append the close button after the expansion is done
+			cardClone.appendChild(closeButton);
+			cardClone.insertAdjacentHTML('afterbegin', content);
+		};
+
+		cards.forEach(card => card.addEventListener('click', onCardClick));
+	</script>
+</body>
+</html>
