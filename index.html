@@ -21,7 +21,7 @@
 
 		body {
       height: 100vh;
-			background: linear-gradient(45deg, black, #ea3e3e);
+			background: #B0C4DE;
 			color: #ddd;
       margin: 0;
 		}
@@ -34,34 +34,51 @@
 
 		.cards {
 			display: flex;
+      height: 100vh;
 
     }
+
+
+        /*____________ Detail of responsive ___________ */
     @media (max-width: 850px) { 
       .cards {
-      flex-direction: column;
+          flex-direction: column;
+          text-align: center;
     }
     .card {
-      width: calc(100vw - 20px)!important;
+      width: 100%!important;
       
     }
     .rightdown{
-      height: 46vh!important;
       flex-direction: column;
     }
-    .leftbot{
-      
-      min-height: 45vh;
+
+    .rd1, .rd2, .leftbot, .lefttop, .righttop {
+      min-height: 50vh;
+      max-width: 90vw!important;
     }
-    .rd1, .rd2, .leftbot, .lefttop {
-      min-height: 45vh;
-    }
+
+    .leftside {
+
+      width: 100%!important;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    } 
+    .rightside{
+
+      width: 100%!important;
+    }/*
+    .paint-gallery{
+      height: 45vh;
+    } */
      }
 
 
+         /*____________ Detail of block ___________ */
     .leftside {
       display: flex;
 			flex-wrap: wrap;
-      flex-direction: column;
+      /* flex-direction: column; */
       width: 40vw;
       
     }
@@ -72,20 +89,15 @@
       width: 60vw;
     }
     .righttop{
-      height: 46vh;
+      height: 50vh  ;
       width: calc(100%  - 20px );
     }
     .rightdown{
       display: flex;
-      height: 50vh;
-      width: calc(100%  - 20px );
+      height:  calc(50vh  - 20px );
+      width:100%;
     }
-    .rd1{
-      width: 30vw;
-    }
-    .rd2{
-      width: 30vw;
-    }
+
     .lefttop {
       width: calc(100%  - 20px );
       height: calc(60% - 20px );;
@@ -96,11 +108,11 @@
     }
 
 
-
+    /*____________ Detail of card ___________ */
 		.card {
 			/* width: 50vw; */
       margin: 10px;
-			border-radius: 35px;
+			/* border-radius: 35px; */
 			cursor: pointer;
       max-width: calc(100% - 20px);
       max-height: calc(100% - 20px);
@@ -108,10 +120,9 @@
 			flex-direction: column;
 			justify-content: flex-end;
       overflow: hidden;
-			background-color: #222;
-			color: #dc7b7b;
+			color: #B0C4DE;
 			padding: 10px;
-			border: 3px solid #e25656;
+			/* border: 3px solid #e25656; */
 			box-shadow: 0 0 9px #4c0505;
 		}
 
@@ -138,6 +149,7 @@
 			font-size: 32px;
 			margin-bottom: 35px !important;
 			animation: slideDown 0.5s ease-out forwards;
+      
 		}
 		.card-content img {
       height: 60vh;
@@ -150,11 +162,40 @@
 			color: #999;
 			animation: slideDown 0.5s ease-out 0.4s forwards;
 		}
+
+
+
+
+    /* __________ Detail of unity ____________ */
 .paint-gallery{
-  background-image: url("./paint-gallery.webp");
+  background: no-repeat url("./paint-gallery.webp");
+  background-size: cover;
+  background-position: center;
 }
+    .luidji{
+      background-image: url("./luidji-colors-show.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
     .scene{
-      background-image:url("./scene.jpg");
+background: url(./scene.jpg);
+    background-size: 100%;
+    background-position: center;
+    }
+
+    .rd1{
+      width: calc(30vw - 20px);
+        background: no-repeat url("./shop.png");
+  background-size: cover;
+  background-position: center;
+    }
+
+    .rd2{
+      width: calc(30vw - 20px);
+        background: no-repeat url("./show.jpg");
+  background-size: cover;
+  background-position: center;
     }
 	</style>
 </head>
@@ -164,9 +205,9 @@
 			<div class="cards">
 
         <div class="leftside" >
-			    <div class="card lefttop" data-type="luidji-colors-show.webp">
-			    	<img src="./luidji-colors-show.webp" />
-            <h2>Victor-futur</h2>
+			    <div class="card lefttop scene" data-type="scene.jpg">
+			    	
+            <h2>Scene</h2>
 			    </div>
 			    <div class="card leftbot paint-gallery" data-type="paint-gallery.webp">
             
@@ -175,18 +216,15 @@
         </div>
 
         <div class="rightside" >
-			  	<div class="card righttop scene" data-type="scene.jpg">
-            
-			  		<h2>Scene</h2>
+			  	<div class="card righttop luidji" data-type="luidji-colors-show.webp">
+			  		<h2>Victor-futur</h2>
 			  	</div>
 
           <div class="rightdown" >
 			  	<div class="card rd1" data-type="shop.png">
-            <img src="./shop.png" />
 			  		<h2>Shop</h2>
 			  	</div>
 			  	<div class="card rd2" data-type="show.jpg">
-            <img src="./show.jpg" />
 			  		<h2>Last show</h2>
 			  	</div>
         </div>
@@ -244,15 +282,11 @@
 			})
 		}
 
+    // <img src="./${type}" alt="${title}">
 		const getCardContent = (title, type) => {
-			return `
-				<div class="card-content">
+      return `
+      <div class="card-content">
 					<h2>${title}</h2>
-					<img src="./${type}" alt="${title}">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor eum ipsa molestiae nesciunt nostrum porro
-						reprehenderit? Animi corporis deleniti dolore laborum, nemo pariatur temporibus voluptatem.
-					</p>
 				</div>
 			`;
 		}
